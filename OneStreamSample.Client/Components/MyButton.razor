@@ -1,0 +1,20 @@
+﻿<button disabled="@Disabled" autofocus="@Autofocus" @attributes="AdditionalAttributes" style="@Style" class="btn @GetButtonClass() @Class" title="@( (Disabled ?? false) ? DisabledTitleText : @TitleText )">
+    @if (IsLoading)
+    {
+        <div class="position-relative">
+            @* Hide the default content while preserving the size of the button *@
+            <span style="opacity: 0;">
+                @ChildContent
+            </span>
+
+            @* Show a centered loading spinner *@
+            <div class="d-flex justify-content-center position-absolute" style="top: 0; bottom: 0; left: 0; right: 0;">
+                <LoadingSpinner Size="LoadingSpinnerSize.ExtraSmall" />
+            </div>
+        </div>
+    }
+    else
+    {
+        @ChildContent
+    }
+</button>

@@ -1,0 +1,39 @@
+﻿@if (IsLoading)
+{
+    <LoadingSpinner />
+}
+else if (Model != null)
+{
+    <div class="card">
+        <div class="card-header">Model Information</div>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" readonly="readonly" @bind-value="@Model.Name" />
+            </div>
+            <div class="form-group mt-3">
+                <label>Description</label>
+                <input type="text" class="form-control" readonly="readonly" @bind-value="@Model.Description" />
+            </div>
+        </div>
+    </div>
+
+    <MyButton IsLoading="IsUpdatingModel" @onclick="UpdateClicked" Class="mt-3 mb-3">Update</MyButton>
+
+    @if (!String.IsNullOrWhiteSpace(ErrorMessage))
+    {
+        <div class="alert alert-danger">@ErrorMessage</div>
+    }
+    else if (!String.IsNullOrWhiteSpace(SuccessMessage))
+    {
+        <div class="alert alert-success">@SuccessMessage</div>
+    }
+}
+else if (!String.IsNullOrWhiteSpace(ErrorMessage))
+{
+    <div class="alert alert-danger">@ErrorMessage</div>
+}
+else
+{
+    <div class="alert alert-warning">Unknown State</div>
+}
